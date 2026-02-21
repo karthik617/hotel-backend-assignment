@@ -8,10 +8,13 @@ app.use((req,res, next) => {
     console.info('REQ endpoint: %s ::: RES status: %d', req.url, res.statusCode)
     next()
 })
-app.use('/api',router)
 app.get('/health', (req,res) => {
-    res.status(200).send({message:"OK", status: 200})
+  res.status(200).send({message:"OK", status: 200})
 })
+app.get('/', (req,res) => {
+  res.status(200).send("OK")
+})
+app.use('/api',router)
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`\n Hotel Reservation API running on http://localhost:${PORT}`);
