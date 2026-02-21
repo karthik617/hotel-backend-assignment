@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { hotelRooms, findOptimalRooms, initializeRooms} = require('./utlis')
+const { hotelRooms, findOptimalRooms, initializeRooms} = require('./utils')
 
 router.get("/rooms", (req, res) => {
   res.json({
