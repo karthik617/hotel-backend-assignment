@@ -41,7 +41,7 @@ function travelTimeBetween(roomA, roomB) {
   return walkToStairs + floorTravel + walkFromStairs;
 }
 
-function totalTravelTime(roomIds) {
+function totalTravelTime(roomIds,hotelRooms) {
   if (roomIds.length <= 1) return 0;
   const sorted = roomIds
     .map((id) => hotelRooms[id])
@@ -55,7 +55,7 @@ function totalTravelTime(roomIds) {
   return total;
 }
 
-function findOptimalRooms(n) {
+function findOptimalRooms(n,hotelRooms) {
   const available = Object.values(hotelRooms)
     .filter((r) => !r.booked)
     .sort((a, b) =>
@@ -71,7 +71,7 @@ function findOptimalRooms(n) {
 
   for (let i = 0; i <= availableIds.length - n; i++) {
     const window = availableIds.slice(i, i + n);
-    const time = totalTravelTime(window);
+    const time = totalTravelTime(window,hotelRooms);
     if (time < bestTime) {
       bestTime = time;
       bestIds = window;
@@ -80,5 +80,5 @@ function findOptimalRooms(n) {
 
   return bestIds ? { roomIds: bestIds, travelTime: bestTime } : null;
 }
-let hotelRooms = initializeRooms();
-module.exports = {initializeRooms, hotelRooms, findOptimalRooms}
+
+module.exports = {initializeRooms, findOptimalRooms}

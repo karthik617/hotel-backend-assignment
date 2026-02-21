@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { hotelRooms, findOptimalRooms, initializeRooms} = require('./utils')
+const { findOptimalRooms, initializeRooms } = require('./utils')
 
+let hotelRooms = initializeRooms()
 router.get("/rooms", (req, res) => {
   res.json({
     success: true,
@@ -41,7 +42,7 @@ router.post("/book", (req, res) => {
     });
   }
 
-  const result = findOptimalRooms(count);
+  const result = findOptimalRooms(count,hotelRooms);
 
   if (!result) {
     return res
@@ -100,11 +101,11 @@ router.post("/random", (req, res) => {
 });
 
 router.post("/reset", (req, res) => {
-  const rooms = initializeRooms();
+  hotelRooms = initializeRooms()
   res.json({
     success: true,
     message: "All bookings cleared.",
-    rooms: Object.values(rooms),
+    rooms: Object.values(hotelRooms),
     stats: { total: 97, booked: 0, available: 97 },
   });
 });
