@@ -6,7 +6,9 @@
 
 ```
 hotel-backend/
-  server.js        ← Node.js + Express API (all logic lives here)
+  server.js    ← Node.js app starts logic is here
+  routes.js    ← Node.js + Express API (all logic lives here)
+  utils.js     ← Helper function and Optimized algorithm for room selection avaliable here
   package.json
 ```
 ---
